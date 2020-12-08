@@ -1,6 +1,8 @@
 /*
 Copyright 2012 Google Inc. All Rights Reserved.
 
+MODIFIED BY (c) AppDynamics, Inc., and its affiliates 2020
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -128,7 +130,8 @@ func newDefaultClassifier() tokenClassifier {
 	t.addRuneClass(spaceRunes, spaceRuneClass)
 	t.addRuneClass(escapingQuoteRunes, escapingQuoteRuneClass)
 	t.addRuneClass(nonEscapingQuoteRunes, nonEscapingQuoteRuneClass)
-	t.addRuneClass(escapeRunes, escapeRuneClass)
+    // Ignore the escape rune to preserve file paths.
+	// t.addRuneClass(escapeRunes, escapeRuneClass)
 	t.addRuneClass(commentRunes, commentRuneClass)
 	return t
 }
@@ -376,8 +379,6 @@ func (t *Tokenizer) scanStream() (*Token, error) {
 								tokenType: tokenType,
 								value:     string(value)}
 							return token, err
-						} else {
-							value = append(value, nextRune)
 						}
 					}
 				default:

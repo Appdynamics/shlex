@@ -1,3 +1,3 @@
-module github.com/google/shlex
+module github.com/Appdynamics/shlex
 
 go 1.13

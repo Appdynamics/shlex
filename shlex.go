@@ -380,6 +380,7 @@ func (t *Tokenizer) scanStream() (*Token, error) {
 								value:     string(value)}
 							return token, err
 						}
+                        value = append(value, nextRune)
 					}
 				default:
 					{
